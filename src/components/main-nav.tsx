@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { SkullIcon as Skateboarding } from "lucide-react"
+import Link from "next/link";
+import { SkullIcon as Skateboarding } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,7 +7,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
+import { navItems } from "@/lib/navItems";
 
 export function MainNav() {
   return (
@@ -18,71 +19,33 @@ export function MainNav() {
       </Link>
       <NavigationMenu className="hidden md:flex">
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Shop</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                <div className="grid gap-2">
-                  <h3 className="font-medium">Categories</h3>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/decks" className="hover:underline">
-                      Decks
-                    </Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/trucks" className="hover:underline">
-                      Trucks
-                    </Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/wheels" className="hover:underline">
-                      Wheels
-                    </Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/bearings" className="hover:underline">
-                      Bearings
-                    </Link>
-                  </NavigationMenuLink>
+          {navItems.map(({ Icon, title, categories }) => (
+            <NavigationMenuItem key={title}>
+              <NavigationMenuTrigger>
+                <Icon className="h-4 w-4 mr-2" />
+                {title}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  {categories.map((category) => (
+                    <div className="grid gap-2" key={category.title}>
+                      <h3 className="font-medium">{category.title}</h3>
+                      {category.items.map((item) => (
+                        <NavigationMenuLink asChild key={item.title}>
+                          <Link
+                            href={item.href}
+                            className="text-muted-foreground hover:text-foreground hover:underline"
+                          >
+                            {item.title}
+                          </Link>
+                        </NavigationMenuLink>
+                      ))}
+                    </div>
+                  ))}
                 </div>
-                <div className="grid gap-2">
-                  <h3 className="font-medium">Featured</h3>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/new-arrivals" className="hover:underline">
-                      New Arrivals
-                    </Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/best-sellers" className="hover:underline">
-                      Best Sellers
-                    </Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink asChild>
-                    <Link href="/shop/sales" className="hover:underline">
-                      Sales
-                    </Link>
-                  </NavigationMenuLink>
-                </div>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Customize</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="grid gap-3 p-6 md:w-[400px] lg:w-[500px]">
-                <NavigationMenuLink asChild>
-                  <Link href="/customize/deck" className="hover:underline">
-                    Custom Deck Designer
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link href="/customize/complete" className="hover:underline">
-                    Build Complete Setup
-                  </Link>
-                </NavigationMenuLink>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ))}
           <NavigationMenuItem>
             <Link href="/tutorials" legacyBehavior passHref>
               <NavigationMenuLink>Tutorials</NavigationMenuLink>
@@ -96,6 +59,5 @@ export function MainNav() {
         </NavigationMenuList>
       </NavigationMenu>
     </div>
-  )
+  );
 }
-

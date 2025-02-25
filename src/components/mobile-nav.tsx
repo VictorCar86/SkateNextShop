@@ -1,47 +1,22 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-
-const mainNavItems = [
-  {
-    title: "Shop",
-    items: [
-      {
-        title: "Categories",
-        items: [
-          { title: "Decks", href: "/shop/decks" },
-          { title: "Trucks", href: "/shop/trucks" },
-          { title: "Wheels", href: "/shop/wheels" },
-          { title: "Bearings", href: "/shop/bearings" },
-        ],
-      },
-      {
-        title: "Featured",
-        items: [
-          { title: "New Arrivals", href: "/shop/new-arrivals" },
-          { title: "Best Sellers", href: "/shop/best-sellers" },
-          { title: "Sales", href: "/shop/sales" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Customize",
-    items: [
-      {
-        title: "Options",
-        items: [
-          { title: "Custom Deck Designer", href: "/customize/deck" },
-          { title: "Build Complete Setup", href: "/customize/complete" },
-        ],
-      },
-    ],
-  },
-]
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { navItems } from "@/lib/navItems";
 
 export function MobileNav() {
   return (
@@ -58,22 +33,27 @@ export function MobileNav() {
         </SheetHeader>
         <div className="flex flex-col gap-4 py-4">
           <Accordion type="single" collapsible className="w-full">
-            {mainNavItems.map((item) => (
-              <AccordionItem key={item.title} value={item.title}>
-                <AccordionTrigger>{item.title}</AccordionTrigger>
+            {navItems.map(({ Icon, title, categories }) => (
+              <AccordionItem key={title} value={title}>
+                <AccordionTrigger>
+                  <span className="flex items-center">
+                    <Icon className="h-4 w-4 mr-2" style={{ transform: "none" }} />
+                    {title}
+                  </span>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="flex flex-col gap-4">
-                    {item.items.map((section) => (
-                      <div key={section.title} className="flex flex-col gap-2">
-                        <h4 className="text-sm font-medium">{section.title}</h4>
+                    {categories.map((category) => (
+                      <div key={category.title} className="flex flex-col gap-2">
+                        <h4 className="text-sm font-medium">{category.title}</h4>
                         <div className="flex flex-col gap-2">
-                          {section.items.map((subItem) => (
+                          {category.items.map((item) => (
                             <Link
-                              key={subItem.title}
-                              href={subItem.href}
+                              key={item.title}
+                              href={item.href}
                               className="text-sm text-muted-foreground hover:text-foreground"
                             >
-                              {subItem.title}
+                              {item.title}
                             </Link>
                           ))}
                         </div>
@@ -95,6 +75,5 @@ export function MobileNav() {
         </div>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
-

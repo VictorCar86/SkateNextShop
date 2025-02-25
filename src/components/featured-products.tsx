@@ -1,51 +1,63 @@
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { CarouselItem } from "@/components/ui/carousel";
+import { CustomCarrousel } from "@/components/CustomCarrousel";
 
-const products = [
+let products = [
   {
     name: "Pro Deck Model X",
     price: 60.0,
-    image: "https://picsum.photos/seed/picsum/300/300",
+    image:
+      "https://onboardsk8.com/cdn/shop/files/TablaSantaCruzxGodzillaMechaHand8.0-1.jpg?v=1732227421&width=360",
   },
   {
     name: "Trucks Set - Black",
     price: 45.0,
-    image: "https://picsum.photos/seed/picsum/300/300",
+    image:
+      "https://onboardsk8.com/cdn/shop/files/venture-v-lights-bobby.jpg?v=1729550759&width=360",
   },
   {
-    name: "Wheels 54mm - White",
+    name: "Wheels 62mm - White",
     price: 35.0,
-    image: "https://picsum.photos/seed/picsum/300/300",
+    image:
+      "https://onboardsk8.com/cdn/shop/files/RuedasSpitfireF4BigBeatdownClassic99a.jpg?v=1732738246&width=360",
   },
   {
     name: "Bearings - ABEC 7",
     price: 20.0,
-    image: "https://picsum.photos/seed/picsum/300/300",
+    image:
+      "https://onboardsk8.com/cdn/shop/files/LijaPowellPeraltaColorMeSkull.jpg?v=1729626008&width=360",
   },
-]
+];
+products = products.concat(products);
 
 export function FeaturedProducts() {
   return (
     <section className="py-12">
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold tracking-tight">Featured Products</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <Card key={product.name}>
+      <CustomCarrousel title="Featured Products">
+        {products.map((product, idx) => (
+          <CarouselItem className="md:basis-1/2 lg:basis-1/4" key={idx + product.name}>
+            <Card>
               <CardContent className="p-0">
-                <div className="relative aspect-square">
-                  <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover rounded-t-lg" />
+                <div className="relative rounded-t-lg cursor-pointer aspect-square overflow-hidden">
+                  <Image
+                    src={product.image || "/placeholder.svg"}
+                    alt={product.name}
+                    className="object-cover transition-all duration-300 hover:scale-105"
+                    fill
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="font-medium">{product.name}</h3>
-                  <p className="text-sm text-muted-foreground">${product.price.toFixed(2)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    ${product.price.toFixed(2)}
+                  </p>
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      </div>
+          </CarouselItem>
+        ))}
+      </CustomCarrousel>
     </section>
-  )
+  );
 }
-
