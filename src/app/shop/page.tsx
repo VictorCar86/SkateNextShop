@@ -1,6 +1,12 @@
 import { ShopFilters } from "@/components/shop-filters";
 import { ShopHeader } from "@/components/shop-header";
 import { ProductGrid } from "@/components/product-grid";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "SkateNextShop - Shop",
+  description: "Shop for products",
+};
 
 export default function ShopPage() {
   return (

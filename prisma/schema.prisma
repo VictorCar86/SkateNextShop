@@ -13,9 +13,211 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+
+// Models
 model Product {
-  id        String   @id @default(uuid())
-  name      String
-  price     Int
+  id               String            @id @default(cuid())
+  name             String
+  description      String
+  price            Decimal
+  discountedPrice  Decimal?
+  stock            Int
+  available        Boolean           @default(true)
+  sku              String?           @unique
+  brand            Brand             @relation(fields: [brandId], references: [id])
+  brandId          String
+  category         Category          @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  images           ProductImage[]
+  reviews          Review[]
+  createdAt        DateTime?         @default(now())
+  updatedAt        DateTime?         @updatedAt
+  skateboardProduct SkateboardProduct?
+  clothingProduct   ClothingProduct?
+  accessoryProduct  AccessoryProduct?
+  orderItems       OrderItem[]
+  cartItems        CartItem[]
+}
+
+model SkateboardProduct {
+  id              String   @id @default(cuid())
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String   @unique
+  type            SkateboardType
+  width           Decimal?
+  length          Decimal?
+  wheelbase       Decimal?
+  material        String?
+  concave         String?
+  mountingHoles   String?
+  truckWidth      Decimal?
+  wheelDiameter   Decimal?
+  wheelHardness   Int?
+  bearingType     String?
+}
+
+model ClothingProduct {
+  id              String   @id @default(cuid())
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String   @unique
+  type            ClothingType
+  gender          Gender
+  size            String
+  color           String
+  material        String
+  careInstructions String?
+}
+
+model AccessoryProduct {
+  id              String   @id @default(cuid())
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String   @unique
+  type            AccessoryType
+  color           String?
+  material        String?
+  dimensions      String?
+}
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  logo        String?
+  website     String?
+  products    Product[]
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  parent      Category? @relation("SubCategories", fields: [parentId], references: [id])
+  parentId    String?
+  children    Category[] @relation("SubCategories")
+  products    Product[]
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String
+  role          UserRole  @default(CUSTOMER)
+  reviews       Review[]
+  orders        Order[]
+  cart          Cart?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String
+  items         OrderItem[]
+  status        OrderStatus
+  total         Decimal
+  shippingAddress String
+  paymentIntent String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Decimal
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String     @unique
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  cartId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+}
+
+// Enums
+enum SkateboardType {
+  DECK
+  TRUCKS
+  WHEELS
+  BEARINGS
+  GRIPTAPE
+  HARDWARE
+  COMPLETE
+}
+
+enum ClothingType {
+  TSHIRT
+  HOODIE
+  PANTS
+  SHORTS
+  SHOES
+  HAT
+  SOCKS
+}
+
+enum AccessoryType {
+  HATS
+  BACKPACK
+  BAGS
+  TOOLS
+  PROTECTION
+  STICKER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNISEX
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
