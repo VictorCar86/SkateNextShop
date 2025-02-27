@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import { PrismaClient, Brand, Category } from '@prisma/client'
+import { Brand, Category } from '@prisma/client'
 import { faker } from '@faker-js/faker'
-
-const prisma = new PrismaClient()
+import prisma from "@/lib/prisma"
 
 async function main() {
     console.info('Starting to seed database...')
