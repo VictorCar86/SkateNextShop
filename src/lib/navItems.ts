@@ -8,18 +8,18 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "Decks", href: "/shop/decks" },
-                    { title: "Trucks", href: "/shop/trucks" },
-                    { title: "Wheels", href: "/shop/wheels" },
-                    { title: "Bearings", href: "/shop/bearings" },
+                    { title: "Decks", href: "/shop?categories=Decks" },
+                    { title: "Trucks", href: "/shop?categories=Trucks" },
+                    { title: "Wheels", href: "/shop?categories=Wheels" },
+                    { title: "Bearings", href: "/shop?categories=Bearings" },
                 ],
             },
             {
                 title: "Featured",
                 items: [
-                    { title: "New Arrivals", href: "/shop/new-arrivals" },
-                    { title: "Best Sellers", href: "/shop/best-sellers" },
-                    { title: "Sales", href: "/shop/sales" },
+                    { title: "New Arrivals", href: "/shop?categories=Skateboards&sort=newest" },
+                    { title: "Best Sellers", href: "/shop?categories=Skateboards&sort=best-selling" },
+                    { title: "Featured", href: "/shop?categories=Skateboards&sort=on-featured" },
                 ],
             },
         ],
@@ -31,18 +31,18 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "T-Shirts", href: "/shop/t-shirts" },
-                    { title: "Hoodies", href: "/shop/hoodies" },
-                    { title: "Shorts", href: "/shop/accessories" },
-                    { title: "Pants", href: "/shop/pants" },
+                    { title: "T-Shirts", href: "/shop?categories=T-Shirts" },
+                    { title: "Hoodies", href: "/shop?categories=Hoodies" },
+                    { title: "Shorts", href: "/shop?categories=Shorts" },
+                    { title: "Pants", href: "/shop?categories=Pants" },
                 ],
             },
             {
                 title: "Featured",
                 items: [
-                    { title: "New Arrivals", href: "/shop/new-arrivals" },
-                    { title: "Best Sellers", href: "/shop/best-sellers" },
-                    { title: "Sales", href: "/shop/sales" },
+                    { title: "New Arrivals", href: "/shop?categories=Clothes&sort=newest" },
+                    { title: "Best Sellers", href: "/shop?categories=Clothes&sort=best-selling" },
+                    { title: "Featured", href: "/shop?categories=Clothes&sort=on-featured" },
                 ],
             },
         ],
@@ -54,18 +54,18 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "Gloves", href: "/shop/gloves" },
-                    { title: "Hats", href: "/shop/hats" },
-                    { title: "Backpacks", href: "/shop/backpacks" },
-                    { title: "Bags", href: "/shop/bags" },
+                    { title: "Gloves", href: "/shop?categories=Gloves" },
+                    { title: "Hats", href: "/shop?categories=Hats" },
+                    { title: "Backpacks", href: "/shop?categories=Backpacks" },
+                    { title: "Bags", href: "/shop?categories=Bags" },
                 ],
             },
             {
                 title: "Featured",
                 items: [
-                    { title: "New Arrivals", href: "/shop/new-arrivals" },
-                    { title: "Best Sellers", href: "/shop/best-sellers" },
-                    { title: "Sales", href: "/shop/sales" },
+                    { title: "New Arrivals", href: "/shop?categories=Accessories&sort=newest" },
+                    { title: "Best Sellers", href: "/shop?categories=Accessories&sort=best-selling" },
+                    { title: "Featured", href: "/shop?categories=Accessories&sort=on-featured" },
                 ],
             },
         ],
