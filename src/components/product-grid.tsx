@@ -17,7 +17,7 @@ const products = await prisma.product.findMany({
     category: true,
     images: true,
   },
-  take: 10,
+  take: 20,
 });
 
 export function ProductGrid() {
