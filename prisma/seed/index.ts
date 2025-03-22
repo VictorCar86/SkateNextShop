@@ -2,6 +2,7 @@
 import { Brand, Category } from '@prisma/client'
 import { faker } from '@faker-js/faker'
 import prisma from "@/lib/prisma"
+import createProductImages from './scripts/products-images'
 
 async function main() {
     console.info('Starting to seed database...')
@@ -20,6 +21,8 @@ async function main() {
     // Create products
     const products = await createProducts(brands, categories)
     console.info(`Created ${products.length} products`)
+    // Create product images
+    await createProductImages(products);
 
     // // Create users
     // const users = await createUsers()

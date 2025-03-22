@@ -78,6 +78,6 @@ export default async function createProductImages(products: Product[]) {
     return products;
 }
 
-await prisma.productImage.deleteMany();
-const products = await prisma.product.findMany();
-createProductImages(products);
+// await prisma.productImage.deleteMany();
+// const products = await prisma.product.findMany();
+// createProductImages(products);
