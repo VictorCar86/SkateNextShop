@@ -11,22 +11,23 @@ export const metadata: Metadata = {
   description: "Shop for products",
 };
 
-type ShopPageProps = Promise<{
-  searchParams: {
-    categories?: string;
-    brands?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    search?: string;
-    sort?: string;
-    page?: string;
-  };
+type searchParamsProps = Promise<{
+  categories?: string;
+  brands?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  search?: string;
+  sort?: string;
+  page?: string;
 }>;
 
-export default async function ShopPage({ params }: { params: ShopPageProps }) {
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: searchParamsProps;
+}) {
   // Get filter options
   const { categories, brands, priceRange } = await getFilterOptions();
-  const { searchParams } = await params;
   const {
     categories: categoriesParams,
     brands: brandsParams,
@@ -35,7 +36,7 @@ export default async function ShopPage({ params }: { params: ShopPageProps }) {
     search: searchParam,
     sort: sortParams,
     page: pageParams,
-  } = searchParams;
+  } = await searchParams;
 
   // Parse search params
   const currentPage = Number(pageParams) || 1;
