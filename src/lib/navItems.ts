@@ -71,3 +71,24 @@ export const navItems = [
         ],
     },
 ]
+
+/* Shop Categories */
+// /shop?categories=Skateboards
+// /shop?categories=Decks
+// /shop?categories=Trucks
+// /shop?categories=Wheels
+// /shop?categories=Bearings
+// /shop?categories=Clothes
+// /shop?categories=T-Shirts
+// /shop?categories=Hoodies
+// /shop?categories=Shorts
+// /shop?categories=Pants
+// /shop?categories=Accessories
+// /shop?categories=Gloves
+// /shop?categories=Hats
+// /shop?categories=Backpacks
+// /shop?categories=Bags
+
+// &sort=newest
+// &sort=best-selling
+// &sort=on-featured

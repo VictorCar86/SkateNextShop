@@ -33,7 +33,11 @@ const products = [
   // ... other products
 ];
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id: productId } = await params;
   const product = products.find((p) => p.id === "1");
   console.log("🚀 ~ ProductPage ~ productId:", productId);

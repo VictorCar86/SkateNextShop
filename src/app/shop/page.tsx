@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Shop for products",
 };
 
-interface ShopPageProps {
+type ShopPageProps = Promise<{
   searchParams: {
     categories?: string;
     brands?: string;
@@ -21,13 +21,12 @@ interface ShopPageProps {
     sort?: string;
     page?: string;
   };
-}
+}>;
 
-export default async function ShopPage({ searchParams }: ShopPageProps) {
+export default async function ShopPage({ params }: { params: ShopPageProps }) {
   // Get filter options
   const { categories, brands, priceRange } = await getFilterOptions();
-
-  // Await search params *required*
+  const { searchParams } = await params;
   const {
     categories: categoriesParams,
     brands: brandsParams,
@@ -36,7 +35,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     search: searchParam,
     sort: sortParams,
     page: pageParams,
-  } = await searchParams;
+  } = searchParams;
 
   // Parse search params
   const currentPage = Number(pageParams) || 1;
