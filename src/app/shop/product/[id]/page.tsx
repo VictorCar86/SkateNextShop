@@ -16,10 +16,10 @@ const products = [
     subcategory: "Street",
     brand: "Element",
     images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600&text=Image+2",
-      "/placeholder.svg?height=600&width=600&text=Image+3",
-      "/placeholder.svg?height=600&width=600&text=Image+4",
+      "/images/placeholder-product.webp",
+      "/images/placeholder-product.webp",
+      "/images/placeholder-product.webp",
+      "/images/placeholder-product.webp",
     ],
     sizes: ["7.75", "8.0", "8.25", "8.5"],
     specs: [
@@ -34,7 +34,9 @@ const products = [
 ];
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id);
+  const { id: productId } = await params;
+  const product = products.find((p) => p.id === "1");
+  console.log("🚀 ~ ProductPage ~ productId:", productId);
 
   if (!product) {
     notFound();

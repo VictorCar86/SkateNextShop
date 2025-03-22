@@ -36,6 +36,7 @@ export function ProductReviews({
   productId: string;
   className?: string;
 }) {
+  console.log("🚀 ~ productId:", productId);
   return (
     <div className={className}>
       <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>

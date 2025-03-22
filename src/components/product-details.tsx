@@ -38,7 +38,7 @@ export function ProductDetails({ product }: { product: Product }) {
             <CarouselItem key={index}>
               <div className="aspect-square relative overflow-hidden rounded-lg">
                 <Image
-                  src={image || "/placeholder.svg"}
+                  src={image || "/images/placeholder-product.webp"}
                   alt={`${product.name} - Image ${index + 1}`}
                   fill
                   className="object-cover"

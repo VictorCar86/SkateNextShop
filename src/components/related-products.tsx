@@ -9,25 +9,25 @@ const products = [
     id: "2",
     name: "Trucks Set - Black",
     price: 45.0,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/images/placeholder-product.webp",
   },
   {
     id: "3",
     name: "Wheels 54mm - White",
     price: 35.0,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/images/placeholder-product.webp",
   },
   {
     id: "4",
     name: "Bearings - ABEC 7",
     price: 20.0,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/images/placeholder-product.webp",
   },
   {
     id: "5",
     name: "Cruiser Deck - Bamboo",
     price: 75.0,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/images/placeholder-product.webp",
   },
 ];
 
