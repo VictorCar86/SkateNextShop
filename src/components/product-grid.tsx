@@ -53,7 +53,7 @@ export function ProductGrid({ products }: ProductGridProps) {
           </CardHeader>
           <CardContent className="p-4 pt-0">
             <div className="flex items-center justify-between">
-              <span className="font-medium">${product.price.toNumber()}</span>
+              <span className="font-medium">${Number(product.price)}</span>
               <Button size="sm">Add to Cart</Button>
             </div>
             <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">

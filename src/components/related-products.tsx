@@ -1,35 +1,12 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
-// This would typically come from a database or API
-const products = [
-  {
-    id: "2",
-    name: "Trucks Set - Black",
-    price: 45.0,
-    image: "/images/placeholder-product.webp",
-  },
-  {
-    id: "3",
-    name: "Wheels 54mm - White",
-    price: 35.0,
-    image: "/images/placeholder-product.webp",
-  },
-  {
-    id: "4",
-    name: "Bearings - ABEC 7",
-    price: 20.0,
-    image: "/images/placeholder-product.webp",
-  },
-  {
-    id: "5",
-    name: "Cruiser Deck - Bamboo",
-    price: 75.0,
-    image: "/images/placeholder-product.webp",
-  },
-];
+import { Product } from "@/lib/types";
+import { CURRENT_HOST } from "@/lib/constants";
 
 export function RelatedProducts({
   currentProductId,
@@ -38,7 +15,28 @@ export function RelatedProducts({
   currentProductId: string;
   className?: string;
 }) {
-  const relatedProducts = products.filter((p) => p.id !== currentProductId).slice(0, 4);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    async function fetchRelatedProducts() {
+      try {
+        const randomPage = Math.floor(Math.random() * 5) + 1;
+        const res = await fetch(
+          `${CURRENT_HOST}/api/products?category=${currentProductId}&limit=4&page=${randomPage}`,
+        );
+        if (res.ok) {
+          const data = await res.json();
+          setRelatedProducts(
+            data.products.filter((p: Product) => p.id !== currentProductId),
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch related products:", error);
+      }
+    }
+
+    fetchRelatedProducts();
+  }, [currentProductId]);
 
   return (
     <div className={className}>
@@ -50,8 +48,10 @@ export function RelatedProducts({
               <CardContent className="p-0">
                 <div className="relative aspect-square">
                   <Image
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
+                    src={
+                      product?.images?.at(0)?.url || "/images/placeholder-product.webp"
+                    }
+                    alt={product?.images?.at(0)?.alt || product.name}
                     fill
                     className="object-cover transition-transform hover:scale-105"
                   />
@@ -59,7 +59,7 @@ export function RelatedProducts({
                 <div className="p-4">
                   <h3 className="font-medium line-clamp-1">{product.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    ${product.price.toFixed(2)}
+                    ${Number(product.price).toFixed(2)}
                   </p>
                 </div>
               </CardContent>

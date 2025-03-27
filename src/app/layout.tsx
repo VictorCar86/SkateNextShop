@@ -1,13 +1,13 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { MainNav } from "@/components/main-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { CartSheet } from "@/components/cart-sheet";
 import { Footer } from "@/components/footer";
+import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import "./globals.css";
 
 const kanit = Kanit({ subsets: ["latin"], weight: "400" });
 export const metadata: Metadata = {

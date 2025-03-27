@@ -1,8 +1,8 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -73,8 +73,8 @@ export function HeroSection() {
           skaters.
         </p>
         <div className="flex flex-col gap-4 min-[400px]:flex-row">
-          <Button size="lg" variant="default">
-            Shop Now
+          <Button size="lg" variant="default" asChild>
+            <Link href="/shop">Shop Now</Link>
           </Button>
           <Button
             size="lg"

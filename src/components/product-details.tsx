@@ -13,47 +13,45 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  subcategory: string;
-  brand: string;
-  images: string[];
-  sizes: string[];
-}
+import { Product } from "@/lib/types";
 
 export function ProductDetails({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+  const [selectedSize, setSelectedSize] = useState(
+    product.skateboardProduct?.width?.toString() || "",
+  );
+
+  const sizes = product.skateboardProduct
+    ? ["7.75", "8.0", "8.25", "8.5"]
+    : product.clothingProduct
+      ? ["S", "M", "L", "XL"]
+      : [];
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <Carousel className="w-full">
+    <div className="grid gap-14 lg:grid-cols-2 lg:pl-12">
+      <Carousel className="w-full max-w-[450px] justify-self-center">
         <CarouselContent>
-          {product.images.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="aspect-square relative overflow-hidden rounded-lg">
-                <Image
-                  src={image || "/images/placeholder-product.webp"}
-                  alt={`${product.name} - Image ${index + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </CarouselItem>
-          ))}
+          {product.images &&
+            product.images.map((image, index) => (
+              <CarouselItem key={index}>
+                <div className="aspect-square relative overflow-hidden rounded-lg">
+                  <Image
+                    src={image.url || "/images/placeholder-product.webp"}
+                    alt={image.alt || `${product.name} - Image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden sm:inline-flex" />
+        <CarouselNext className="hidden sm:inline-flex" />
       </Carousel>
       <div className="flex flex-col gap-4">
         <div>
           <h1 className="text-3xl font-bold">{product.name}</h1>
-          <p className="text-xl font-semibold mt-2">${product.price.toFixed(2)}</p>
+          <p className="text-xl font-semibold mt-2">${Number(product.price)}</p>
         </div>
         <p className="text-muted-foreground">{product.description}</p>
         <div>
@@ -63,7 +61,7 @@ export function ProductDetails({ product }: { product: Product }) {
             onValueChange={setSelectedSize}
             className="flex gap-2"
           >
-            {product.sizes.map((size) => (
+            {sizes.map((size) => (
               <div key={size}>
                 <RadioGroupItem
                   value={size}
@@ -100,9 +98,8 @@ export function ProductDetails({ product }: { product: Product }) {
           </Button>
         </div>
         <div className="flex flex-col gap-1 text-sm">
-          <p>Category: {product.category}</p>
-          <p>Subcategory: {product.subcategory}</p>
-          <p>Brand: {product.brand}</p>
+          <p>Category: {product?.category?.name || "N/N"}</p>
+          <p>Brand: {product?.brand?.name || "N/N"}</p>
         </div>
       </div>
     </div>
