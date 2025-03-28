@@ -22,6 +22,7 @@ export default async function ShopPage({
 }) {
   const filterOptionsRes = await fetch(`${CURRENT_HOST}/api/products`, {
     method: "OPTIONS",
+    cache: "no-store",
   });
 
   if (!filterOptionsRes.ok) {

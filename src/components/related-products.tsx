@@ -59,7 +59,7 @@ export function RelatedProducts({
                 <div className="p-4">
                   <h3 className="font-medium line-clamp-1">{product.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    ${Number(product.price).toFixed(2)}
+                    ${Number(product.price)}
                   </p>
                 </div>
               </CardContent>
