@@ -1,1 +1,1 @@
-export const CURRENT_HOST = process.env.NEXT_PUBLIC_CURRENT_HOST_URL || "";
+export const CURRENT_HOST = process.env.CURRENT_HOST_URL || "";

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Product } from "@/lib/types";
-import { CURRENT_HOST } from "@/lib/constants";
 
 export function RelatedProducts({
   currentProductId,
@@ -22,7 +21,7 @@ export function RelatedProducts({
       try {
         const randomPage = Math.floor(Math.random() * 5) + 1;
         const res = await fetch(
-          `${CURRENT_HOST}/api/products?category=${currentProductId}&limit=4&page=${randomPage}`,
+          `/api/products?category=${currentProductId}&limit=4&page=${randomPage}`,
         );
         if (res.ok) {
           const data = await res.json();
