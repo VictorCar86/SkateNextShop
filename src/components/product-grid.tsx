@@ -9,13 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Product } from "@/lib/actions";
+import { Product } from "@/lib/types";
 
-interface ProductGridProps {
-  products: Product[];
-}
-
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products }: { products: Product[] }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.length === 0 && (
@@ -28,8 +24,8 @@ export function ProductGrid({ products }: ProductGridProps) {
           <Link href={`/shop/product/${product.id}`}>
             <div className="relative aspect-square overflow-hidden">
               <Image
-                src={product.images[0]?.url ?? "/images/placeholder-product.webp"}
-                alt={product.images[0]?.alt ?? "Product Image"}
+                src={product?.images?.at(0)?.url ?? "/images/placeholder-product.webp"}
+                alt={product?.images?.at(0)?.alt ?? "Product Image"}
                 fill
                 className="object-cover transition-transform hover:scale-105"
               />
@@ -57,9 +53,9 @@ export function ProductGrid({ products }: ProductGridProps) {
               <Button size="sm">Add to Cart</Button>
             </div>
             <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-              <span>{product.category.name}</span>
+              <span>{product?.category?.name}</span>
               <span>•</span>
-              <span>{product.brand.name}</span>
+              <span>{product?.brand?.name}</span>
             </div>
           </CardContent>
         </Card>
