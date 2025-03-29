@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Minus, Plus, Heart } from "lucide-react";
+import { Minus, Plus, Heart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { Product } from "@/lib/types";
 
 export function ProductDetails({ product }: { product: Product }) {
@@ -20,12 +21,19 @@ export function ProductDetails({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState(
     product.skateboardProduct?.width?.toString() || "",
   );
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const sizes = product.skateboardProduct
     ? ["7.75", "8.0", "8.25", "8.5"]
     : product.clothingProduct
       ? ["S", "M", "L", "XL"]
       : [];
+
+  const openImageModal = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setImageModalOpen(true);
+  };
 
   return (
     <div className="grid gap-14 lg:grid-cols-2 lg:pl-12">
@@ -34,7 +42,12 @@ export function ProductDetails({ product }: { product: Product }) {
           {product.images &&
             product.images.map((image, index) => (
               <CarouselItem key={index}>
-                <div className="aspect-square relative overflow-hidden rounded-lg">
+                <div
+                  className="aspect-square relative overflow-hidden rounded-lg cursor-pointer"
+                  onClick={() =>
+                    openImageModal(image.url || "/images/placeholder-product.webp")
+                  }
+                >
                   <Image
                     src={image.url || "/images/placeholder-product.webp"}
                     alt={image.alt || `${product.name} - Image ${index + 1}`}
@@ -70,7 +83,7 @@ export function ProductDetails({ product }: { product: Product }) {
                 />
                 <Label
                   htmlFor={`size-${size}`}
-                  className="flex h-10 w-10 items-center justify-center rounded-md border border-muted bg-popover hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground"
+                  className="flex h-10 w-10 items-center justify-center rounded-md border border-muted bg-popover cursor-pointer hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-primary-foreground"
                 >
                   {size}
                 </Label>
@@ -102,6 +115,27 @@ export function ProductDetails({ product }: { product: Product }) {
           <p>Brand: {product?.brand?.name || "N/N"}</p>
         </div>
       </div>
+
+      {/* Image Modal */}
+      <Dialog open={imageModalOpen} onOpenChange={setImageModalOpen}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-transparent border-none">
+          <div className="relative w-full h-full max-h-[80vh] flex items-center justify-center">
+            {selectedImage && (
+              <Image
+                src={selectedImage}
+                alt="Product image"
+                width={1200}
+                height={800}
+                className="object-contain max-h-[80vh]"
+              />
+            )}
+            <DialogClose className="absolute top-2 right-2 bg-background/80 rounded-full p-2 hover:bg-background">
+              <X className="h-5 w-5" />
+              <span className="sr-only">Close</span>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
