@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import { Brand, Category } from '@prisma/client'
+import { Brand, Category, Product } from '@prisma/client'
 import { faker } from '@faker-js/faker'
 import prisma from "@/lib/prisma"
 import createProductImages from './scripts/products-images'
+import createUsers from './scripts/users'
+import createReviews from './scripts/reviews'
 
 async function main() {
     console.info('Starting to seed database...')
 
     // Clear existing data
-    await clearDatabase()
+    await clearDatabase();
 
     // Create brands
     const brands = await createBrands()
@@ -24,34 +26,35 @@ async function main() {
     // Create product images
     await createProductImages(products);
 
-    // // Create users
-    // const users = await createUsers()
-    // console.info(`Created ${users.length} users`)
+    // Create users
+    const users = await createUsers()
+    console.info(`Created ${users.length} users`)
 
-    // // Create reviews
-    // await createReviews(users, products)
+    // Create reviews
+    await createReviews(users, products)
+    console.info('Created reviews for products')
 
     // // Create orders
     // await createOrders(users, products)
 
-    console.info('Seeding completed successfully')
+    console.info('🌱 Seeding completed successfully')
 }
 
 async function clearDatabase() {
     // Delete in correct order to respect foreign key constraints
-    // await prisma.cartItem.deleteMany({})
-    // await prisma.cart.deleteMany({})
-    // await prisma.orderItem.deleteMany({})
-    // await prisma.order.deleteMany({})
-    // await prisma.review.deleteMany({})
+    await prisma.cartItem.deleteMany({})
+    await prisma.cart.deleteMany({})
+    await prisma.orderItem.deleteMany({})
+    await prisma.order.deleteMany({})
+    await prisma.review.deleteMany({})
     await prisma.accessoryProduct.deleteMany({})
     await prisma.clothingProduct.deleteMany({})
     await prisma.skateboardProduct.deleteMany({})
-    // await prisma.productImage.deleteMany({})
+    await prisma.productImage.deleteMany({})
     await prisma.product.deleteMany({})
     await prisma.category.deleteMany({})
     await prisma.brand.deleteMany({})
-    // await prisma.user.deleteMany({})
+    await prisma.user.deleteMany({})
 }
 
 async function createBrands() {
@@ -100,7 +103,7 @@ async function createBrands() {
         },
         {
             name: 'Vans',
-            description: 'Iconic footwear and apparel company with deep skateboarding roots',
+            description: 'Iconic footwear andapparel company with deep skateboarding roots',
             logo: 'https://example.com/logos/vans.png',
             website: 'https://vans.com'
         },
@@ -303,8 +306,8 @@ async function createCategories() {
     return categories
 }
 
-async function createProducts(brands: Brand[], categories: Category[]) {
-    const products = []
+async function createProducts(brands: Brand[], categories: Category[]): Promise<Product[]> {
+    const products: Product[] = []
 
     // Find category IDs
     const findCategoryByName = (name: string) => categories.find(c => c.name === name)

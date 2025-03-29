@@ -2,12 +2,14 @@ import {
   Product as PrismaProduct,
   Category,
   Brand,
+  Review,
   SkateboardProduct,
   ClothingProduct,
   AccessoryProduct,
   SkateboardType,
   ClothingType,
   AccessoryType,
+  User,
 } from "@prisma/client";
 
 export interface Product extends PrismaProduct {
@@ -17,6 +19,7 @@ export interface Product extends PrismaProduct {
   }[];
   category?: Category;
   brand?: Brand;
+  reviews: (Review & { user?: User })[];
   skateboardProduct?: SkateboardProduct;
   clothingProduct?: ClothingProduct;
   accessoryProduct?: AccessoryProduct;

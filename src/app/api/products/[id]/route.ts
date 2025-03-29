@@ -12,6 +12,20 @@ export async function GET(
         images: true,
         category: true,
         brand: true,
+        reviews: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
         skateboardProduct: true,
         clothingProduct: true,
         accessoryProduct: true,

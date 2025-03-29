@@ -44,7 +44,7 @@ export default async function ProductPage({
       <ProductDetails product={product} />
       {specs.length > 0 && <ProductSpecs specs={specs} className="mt-10" />}
       <RelatedProducts currentProductId={product.id} className="mt-10" />
-      <ProductReviews productId={product.id} className="mt-10" />
+      <ProductReviews reviews={product.reviews} className="mt-10" />
     </div>
   );
 }
