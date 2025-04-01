@@ -7,6 +7,8 @@ import { ProductGrid } from "@/components/shop-page/product-grid";
 import { CustomPagination } from "@/components/CustomPagination";
 import { FilterOptions } from "@/lib/types";
 import { CURRENT_HOST } from "@/lib/constants";
+import { ShopFiltersSkeleton } from "@/components/shop-page/shop-filters-skeleton";
+import { ProductGridSkeleton } from "@/components/shop-page/product-grid-skeleton";
 
 export const metadata: Metadata = {
   title: "SkateNextShop - Shop",
@@ -15,11 +17,8 @@ export const metadata: Metadata = {
 
 type searchParamsProps = Promise<Partial<Omit<FilterOptions, "limit" | "types">>>;
 
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: searchParamsProps;
-}) {
+// Separate component for filter options fetching
+async function FilterOptionsLoader() {
   const filterOptionsRes = await fetch(`${CURRENT_HOST}/api/products`, {
     method: "OPTIONS",
     cache: "no-store",
@@ -35,6 +34,17 @@ export default async function ShopPage({
     priceRange: priceRangeOptions,
   } = await filterOptionsRes.json();
 
+  return (
+    <ShopFilters
+      categories={categoriesOptions}
+      brands={brandsOptions}
+      priceRange={priceRangeOptions}
+    />
+  );
+}
+
+// Separate component for products fetching
+async function ProductsLoader({ searchParams }: { searchParams: searchParamsProps }) {
   const { categories, brands, minPrice, maxPrice, search, sort, page } =
     await searchParams;
 
@@ -65,29 +75,31 @@ export default async function ShopPage({
   const totalPages = Math.ceil(total / limit);
 
   return (
+    <div className="flex flex-col gap-6">
+      {totalPages > 1 && (
+        <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+      )}
+      <ProductGrid products={products} />
+      {totalPages > 1 && (
+        <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+      )}
+    </div>
+  );
+}
+
+export default function ShopPage({ searchParams }: { searchParams: searchParamsProps }) {
+  return (
     <div className="pb-16 pt-8 px-8">
-      <Suspense fallback={<div>Loading...</div>}>
-        <ShopHeader />
-      </Suspense>
+      <ShopHeader />
       <div className="flex flex-col gap-8 md:flex-row">
         <aside className="md:w-[240px] md:flex-none">
-          <ShopFilters
-            categories={categoriesOptions}
-            brands={brandsOptions}
-            priceRange={priceRangeOptions}
-          />
+          <Suspense fallback={<ShopFiltersSkeleton />}>
+            <FilterOptionsLoader />
+          </Suspense>
         </aside>
         <main className="flex-1">
-          <Suspense fallback={<div>Loading products...</div>}>
-            <div className="flex flex-col gap-6">
-              {totalPages > 1 && (
-                <CustomPagination currentPage={currentPage} totalPages={totalPages} />
-              )}
-              <ProductGrid products={products} />
-              {totalPages > 1 && (
-                <CustomPagination currentPage={currentPage} totalPages={totalPages} />
-              )}
-            </div>
+          <Suspense fallback={<ProductGridSkeleton />}>
+            <ProductsLoader searchParams={searchParams} />
           </Suspense>
         </main>
       </div>

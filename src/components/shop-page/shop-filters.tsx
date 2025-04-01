@@ -111,7 +111,7 @@ export function ShopFilters({ categories, brands, priceRange }: FilterOptionsPro
       )}
       <Accordion
         type="multiple"
-        defaultValue={["categories", "price", "brands"]}
+        // defaultValue={["categories", "price", "brands"]}
         className="w-full"
       >
         <AccordionItem value="categories">
