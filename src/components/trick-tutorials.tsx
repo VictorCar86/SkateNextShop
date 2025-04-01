@@ -1,28 +1,29 @@
-import Image from "next/image"
-import { Play } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 const tutorials = [
   {
+    id: "JNmUK9fvrAs",
     title: "How to Ollie",
     difficulty: "Beginner",
-    duration: "5 min",
-    image: "https://picsum.photos/seed/picsum/300/300",
+    duration: "3 min",
   },
   {
+    id: "jxTGfQT6-lU",
     title: "Kickflip Tutorial",
     difficulty: "Intermediate",
-    duration: "8 min",
-    image: "https://picsum.photos/seed/picsum/300/300",
+    duration: "10 min",
   },
   {
-    title: "360 Flip Guide",
+    id: "kTKySohOatw",
+    title: "Heel Flip Guide",
     difficulty: "Advanced",
-    duration: "12 min",
-    image: "https://picsum.photos/seed/picsum/300/300",
+    duration: "8 min",
   },
-]
+];
 
 export function TrickTutorials() {
   return (
@@ -37,19 +38,7 @@ export function TrickTutorials() {
             <Card key={tutorial.title}>
               <CardContent className="p-0">
                 <div className="relative">
-                  <Image
-                    src={tutorial.image || "/placeholder.svg"}
-                    alt={tutorial.title}
-                    width={300}
-                    height={250}
-                    className="w-full h-[250px] aspect-video rounded-t-lg object-cover"
-                  />
-                  <Button
-                    size="icon"
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-                  >
-                    <Play className="h-4 w-4" />
-                  </Button>
+                  <LiteYouTubeEmbed id={tutorial.id} title={tutorial.title} />
                 </div>
                 <div className="p-4">
                   <h3 className="font-medium">{tutorial.title}</h3>
@@ -65,6 +54,5 @@ export function TrickTutorials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
