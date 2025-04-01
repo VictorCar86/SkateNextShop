@@ -1,8 +1,8 @@
-import { HeroSection } from "@/components/hero-section";
-import { FeaturedProducts } from "@/components/featured-products";
-import { CategoryGrid } from "@/components/category-grid";
-import { TrickTutorials } from "@/components/trick-tutorials";
-import { CommunitySection } from "@/components/community-section";
+import { HeroSection } from "@/components/main-page/hero-section";
+import { FeaturedProducts } from "@/components/main-page/featured-products";
+import { CategoryGrid } from "@/components/main-page/category-grid";
+import { TrickTutorials } from "@/components/main-page/trick-tutorials";
+import { CommunitySection } from "@/components/main-page/community-section";
 
 export default function Home() {
   return (

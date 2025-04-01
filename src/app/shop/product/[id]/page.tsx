@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { ProductDetails } from "@/components/product-details";
-import { ProductSpecs } from "@/components/product-specs";
-import { RelatedProducts } from "@/components/related-products";
-import { ProductReviews } from "@/components/product-reviews";
+import { ProductDetails } from "@/components/product-id/product-details";
+import { ProductSpecs } from "@/components/product-id/product-specs";
+import { RelatedProducts } from "@/components/product-id/related-products";
+import { ProductReviews } from "@/components/product-id/product-reviews";
 import { CURRENT_HOST } from "@/lib/constants";
 import { Product } from "@/lib/types";
 

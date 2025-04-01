@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CartItem } from "@/components/cart-item";
+import { CartItem } from "@/components/main-page/cart-item";
 import { Separator } from "@/components/ui/separator";
 
 export function CartSheet() {

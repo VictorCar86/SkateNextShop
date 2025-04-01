@@ -1,10 +1,10 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
-import { MainNav } from "@/components/main-nav";
-import { MobileNav } from "@/components/mobile-nav";
-import { CartSheet } from "@/components/cart-sheet";
-import { Footer } from "@/components/footer";
+import { MainNav } from "@/components/main-page/main-nav";
+import { MobileNav } from "@/components/main-page/mobile-nav";
+import { CartSheet } from "@/components/main-page/cart-sheet";
+import { Footer } from "@/components/main-page/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";

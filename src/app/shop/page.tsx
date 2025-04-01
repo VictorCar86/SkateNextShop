@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { Metadata } from "next/types";
 import { notFound } from "next/navigation";
-import { ShopFilters } from "@/components/shop-filters";
-import { ShopHeader } from "@/components/shop-header";
-import { ProductGrid } from "@/components/product-grid";
+import { ShopFilters } from "@/components/shop-page/shop-filters";
+import { ShopHeader } from "@/components/shop-page/shop-header";
+import { ProductGrid } from "@/components/shop-page/product-grid";
 import { CustomPagination } from "@/components/CustomPagination";
 import { FilterOptions } from "@/lib/types";
 import { CURRENT_HOST } from "@/lib/constants";
