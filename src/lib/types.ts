@@ -26,8 +26,8 @@ export interface Product extends PrismaProduct {
 }
 
 export type FilterOptions = {
-  categories: string[];
-  brands: string[];
+  categories: Category["name"][];
+  brands: Brand["name"][];
   minPrice: number;
   maxPrice: number;
   types: SkateboardType[] | ClothingType[] | AccessoryType[];

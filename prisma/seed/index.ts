@@ -163,7 +163,7 @@ async function createCategories() {
             description: 'Everything you need to build or ride a skateboard'
         },
         {
-            name: 'Clothing',
+            name: 'Clothes',
             description: 'Skateboard apparel and footwear'
         },
         {

@@ -40,6 +40,7 @@ export function ShopFilters({ categories, brands, priceRange }: FilterOptionsPro
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+  const [effectRan, setEffectRan] = useState(false);
 
   // Initialize state from URL parameters
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
@@ -55,6 +56,10 @@ export function ShopFilters({ categories, brands, priceRange }: FilterOptionsPro
 
   // Update URL with filters
   useEffect(() => {
+    if (!effectRan) {
+      setEffectRan(true);
+      return;
+    }
     startTransition(() => {
       const params = new URLSearchParams();
 
@@ -76,7 +81,7 @@ export function ShopFilters({ categories, brands, priceRange }: FilterOptionsPro
         router.push("/shop");
       }
     });
-  }, [selectedCategories, selectedBrands, priceRangeValue, router]);
+  }, [selectedCategories, selectedBrands, priceRangeValue, router, effectRan]);
 
   const handleCategoryChange = (checked: boolean, categoryName: string) => {
     setSelectedCategories((prev) =>

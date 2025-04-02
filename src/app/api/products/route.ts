@@ -22,9 +22,20 @@ export async function GET(request: NextRequest) {
       categories.length > 0
         ? {
           category: {
-            name: {
-              in: categories,
-            },
+            OR: [
+              {
+                name: {
+                  in: categories,
+                },
+              },
+              {
+                parent: {
+                  name: {
+                    in: categories,
+                  },
+                },
+              },
+            ],
           },
         }
         : {},
