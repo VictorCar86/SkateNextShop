@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { CustomPagination } from "../CustomPagination";
+import { CustomPaginationSkeleton } from "../CustomPaginationSkeleton";
 
 export function ProductGridSkeleton() {
   // Create an array of 12 items (same as the limit in the page)
@@ -8,7 +8,7 @@ export function ProductGridSkeleton() {
 
   return (
     <div className="flex flex-col gap-6">
-      <CustomPagination currentPage={1} totalPages={1} />
+      <CustomPaginationSkeleton currentPage={1} totalPages={1} />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {skeletonItems.map((index) => (
           <Card key={index} className="overflow-hidden">
@@ -39,7 +39,7 @@ export function ProductGridSkeleton() {
           </Card>
         ))}
       </div>
-      <CustomPagination currentPage={1} totalPages={1} />
+      <CustomPaginationSkeleton currentPage={1} totalPages={1} />
     </div>
   );
 }

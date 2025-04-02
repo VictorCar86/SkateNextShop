@@ -77,11 +77,15 @@ async function ProductsLoader({ searchParams }: { searchParams: searchParamsProp
   return (
     <div className="flex flex-col gap-6">
       {totalPages > 1 && (
-        <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+        <Suspense>
+          <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+        </Suspense>
       )}
       <ProductGrid products={products} />
       {totalPages > 1 && (
-        <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+        <Suspense>
+          <CustomPagination currentPage={currentPage} totalPages={totalPages} />
+        </Suspense>
       )}
     </div>
   );
@@ -90,7 +94,9 @@ async function ProductsLoader({ searchParams }: { searchParams: searchParamsProp
 export default function ShopPage({ searchParams }: { searchParams: searchParamsProps }) {
   return (
     <div className="pb-16 pt-8 px-8">
-      <ShopHeader />
+      <Suspense>
+        <ShopHeader />
+      </Suspense>
       <div className="flex flex-col gap-8 md:flex-row">
         <aside className="md:w-[240px] md:flex-none">
           <Suspense fallback={<ShopFiltersSkeleton />}>
