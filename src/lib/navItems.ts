@@ -1,6 +1,19 @@
 import { LifeBuoy, Shirt, Glasses } from "lucide-react";
 
-export const navItems = [
+type NavItemType = {
+    Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    title: string;
+    categories: {
+        title: string;
+        items: {
+            title: string;
+            image?: string;
+            href: string;
+        }[];
+    }[];
+}
+
+export const navItems: NavItemType[] = [
     {
         Icon: LifeBuoy,
         title: "Skateboarding",
@@ -8,10 +21,10 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "Decks", href: "/shop?categories=Decks" },
-                    { title: "Trucks", href: "/shop?categories=Trucks" },
-                    { title: "Wheels", href: "/shop?categories=Wheels" },
-                    { title: "Bearings", href: "/shop?categories=Bearings" },
+                    { title: "Decks", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743810453/Decks_r6vvjc.webp", href: "/shop?categories=Decks" },
+                    { title: "Trucks", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743810191/Trucks_cf6o8m.webp", href: "/shop?categories=Trucks" },
+                    { title: "Wheels", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809040/Wheels_wbcfqz.webp", href: "/shop?categories=Wheels" },
+                    { title: "Bearings", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Bearings_jo3chv.webp", href: "/shop?categories=Bearings" },
                 ],
             },
             {
@@ -31,10 +44,10 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "T-Shirts", href: "/shop?categories=T-Shirts" },
-                    { title: "Hoodies", href: "/shop?categories=Hoodies" },
-                    { title: "Shorts", href: "/shop?categories=Shorts" },
-                    { title: "Pants", href: "/shop?categories=Pants" },
+                    { title: "T-Shirts", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809040/T-Shirts_ptjg8m.webp", href: "/shop?categories=T-Shirts" },
+                    { title: "Hoodies", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Hoodies_mx9znd.webp", href: "/shop?categories=Hoodies" },
+                    { title: "Shorts", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809040/Shorts_qb80b1.webp", href: "/shop?categories=Shorts" },
+                    { title: "Pants", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Pants_tumn5w.webp", href: "/shop?categories=Pants" },
                 ],
             },
             {
@@ -54,10 +67,10 @@ export const navItems = [
             {
                 title: "Categories",
                 items: [
-                    { title: "Gloves", href: "/shop?categories=Gloves" },
-                    { title: "Hats", href: "/shop?categories=Hats" },
-                    { title: "Backpacks", href: "/shop?categories=Backpacks" },
-                    { title: "Bags", href: "/shop?categories=Bags" },
+                    { title: "Gloves", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Gloves_j1keml.webp", href: "/shop?categories=Gloves" },
+                    { title: "Hats", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809040/Hats_l3rs0d.webp", href: "/shop?categories=Hats" },
+                    { title: "Backpacks", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Backpacks_zofenb.webp", href: "/shop?categories=Backpacks" },
+                    { title: "Bags", image: "https://res.cloudinary.com/dj9wbpm5v/image/upload/v1743809039/Bags_y8sspf.webp", href: "/shop?categories=Bags" },
                 ],
             },
             {
