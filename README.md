@@ -1,15 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkateNextShop - Skateboarding E-Commerce Platform
+
+A modern e-commerce platform built with Next.js, focused on skateboarding products and community.
+
+## Overview
+
+SkateNextShop is a comprehensive online marketplace for skateboarding enthusiasts, offering:
+
+- A wide range of skateboarding gear (decks, trucks, wheels, bearings)
+- Skateboarding apparel (t-shirts, hoodies, shorts, pants)
+- Accessories (gloves, hats, backpacks, bags)
+- Community features and tutorials
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **UI Components**: Custom components with [Radix UI](https://www.radix-ui.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Database**: [Prisma](https://www.prisma.io/) with SQLite (configurable for PostgreSQL)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Carousel**: [Embla Carousel](https://www.embla-carousel.com/)
+
+## Features
+
+- Responsive design for all device sizes
+- Product filtering and search functionality
+- Category-based navigation
+- Product details with image galleries
+- Related products recommendations
+- Customer reviews
+- Shopping cart functionality
+- Pagination for product listings
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+# Install dependencies
+npm install
+# or
+bun install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 # or
 bun dev
 ```
